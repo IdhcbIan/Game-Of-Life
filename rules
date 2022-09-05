@@ -1,0 +1,27 @@
+
+
+casas
+
+        x-1, y+1       x, y+1    x+1, y+1
+        x-1, y         x,y       x+1, y
+        x-1,y-1        x, y-1    x+1- y-1
+
+mortas e vivas
+
+1) se duas ou tres casas em alive -- continua
+2) se menos de duas ou mais de tres -- morre
+3) se uma casa em mortas tem tres visinhos em alive -- nasce
+
+
+
+
+
+para cada casa ---- numero, de visinho vivos
+checar se vivo ou morto
+se vivo
+        mais de 3
+        igual a 2
+        menor que 2
+se morto
+        ...
+
