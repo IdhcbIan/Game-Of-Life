@@ -1,11 +1,10 @@
-"""
-A = [(5,5), (5,1)]
-B = [(5,5), (3,3), (5,1)]
 
-s = sum(x in A for x in B)
+A = [(5,5), (5,1)]
+B = [(5,5), (3,3), (5,1), (5,4)]
+
+s = sum(x in B for x in A)
 print(s)
 
-"""
 """
 w = 0
 h = 0
@@ -45,7 +44,7 @@ for i in all:
     s = sum(x in visinhos for x in alive)
     print(s)
 """
-
+"""
 
 test_list = [1, 3, 4, 6, 7]
  
@@ -59,7 +58,7 @@ for i in remove_list:
         pass
 
 print(test_list)
-    
+"""
 
 
 

@@ -3,7 +3,7 @@ import pygame
 
 pygame.init()
 
-blockSize = 20
+blockSize = 50
 
 
 
@@ -27,7 +27,7 @@ win = pygame.display.set_mode((win_w, 1000))
 
 pygame.display.set_caption("Conway's Game of Life")
 
-alive = [(5,5), (5,6), (6,5), (6,6)]
+alive = [(9,10), (10,10), (11,10), (8,11)]
 
 vizinhos = []
 
@@ -63,7 +63,7 @@ def count():
             cy += 1
         else:
             pass
- 
+
     
 #--------// Colisions//------------------------------------------------------------------
 
@@ -71,9 +71,9 @@ def draw():
 
     for i in alive:
             s = str(i).replace('(','').replace(')','').split(', ') 
-            [ax, ay] = s
-            x = blockSize*(int(ax)-1)
-            y = blockSize*(int(ay)-1)  
+            [dx, dy] = s
+            x = blockSize*(int(dx)-1)
+            y = blockSize*(int(dy)-1)  
             pygame.draw.rect(win, (0, 0, 0), (x, y, blockSize, blockSize))
 
 #--------// Rules//------------------------------------------------------------------
@@ -82,19 +82,25 @@ pr_out = []
 
 def vis():
   for i in all:
-        s = str(i).replace('(','').replace(')','').split(', ') 
-        [fx, fy] = s
+        
+        abs = str(i).replace('(','').replace(')','').split(', ') 
+        [fx, fy] = abs
         fx = int(fx)
         fy = int(fy)
+        
         vizinhos = [(fx-1, fy+1), (fx, fy+1), (fx+1, fy+1), (fx-1, fy), (fx+1, fy), (fx-1, fy-1), (fx, fy-1), (fx+1, fy-1) ]
 
         s = sum(vs in vizinhos for vs in alive)
-        #print(s)
+        if s != 0:
+            print(i, s)
+            
 
+
+        
         if i in alive:
             if s >= 4:
                 pr_out.append(i)
-            elif s <= 2:
+            elif s < 2:
                 pr_out.append(i)
             elif s == 2 or s == 3:
                 pass
@@ -104,22 +110,26 @@ def vis():
             else:
                 pass
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>> erroooooo <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 def compare():
     for i in pr_out:
-        try:
-            alive.remove(i)
-        except ValueError:
-            pass
+        print(i)
+        alive.remove(i)
+        return alive
+
     for i in pr_in:
         if i not in alive:
             alive.append(i)
+            return alive
 
 #--------------------------------------------------------------------------
 
 count()
-#print(all)
+rodada = 1
 
 run = True
+
 
 while run:
     pygame.time.delay(1000)
@@ -129,18 +139,28 @@ while run:
             run = False
     keys = pygame.key.get_pressed()
 
-    
+
+    print(rodada)
+    rodada += 1
+
     win.fill((255, 255, 255))
     drawGrid()
-    draw()
-
+    
+    
     s = [ax, ay]
     ax = int(ax)
     ay = int(ay)
-    alive.append((ax-1, ay-1))
+    #alive.append((ax-1, ay-1))
     
+    print(alive)
+    draw()
     vis()
     compare()
+    
+    
+
+    #print(alive)
+    #draw()
     pygame.display.update()
 
 
